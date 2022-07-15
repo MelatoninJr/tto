@@ -1,0 +1,36 @@
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid red;
+}
+
+
+.gamecontainer {
+    border: 2px solid pink;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.boardcontainer {
+    width: 500px;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    border: 6px solid purple;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.grid {
+    height: 150px;
+    width: 150px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
