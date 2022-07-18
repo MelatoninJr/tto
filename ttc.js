@@ -107,12 +107,65 @@ const test =  function() {(function () {
     gameContainer.classList.add('gamecontainer')
     container.appendChild(gameContainer)
 
+    const firstDisplay = document.createElement('div')
+    firstDisplay.classList.add('firstdisplay')
+    gameContainer.append(firstDisplay)
+
     const boardContainer = document.createElement('div')
     boardContainer.classList.add('boardcontainer')
     gameContainer.appendChild(boardContainer)
 
+    const secondDisplay = document.createElement('div')
+    secondDisplay.classList.add('firstdisplay')
+    gameContainer.append(secondDisplay)
 
-    
+    const innerHolder = document.createElement ('div')
+    innerHolder.classList.add('innerholder')
+    firstDisplay.append(innerHolder)
+
+    const nameTitle = document.createElement('div')
+    nameTitle.classList.add('nametitle')
+    innerHolder.append(nameTitle)
+    nameTitle.innerText = playerOne
+
+    const picOne = document.createElement('img')
+    picOne.src = 'background1.png'
+    picOne.classList.add('picone')
+    innerHolder.append(picOne)
+
+    const innerHolderTwo = document.createElement ('div')
+    innerHolderTwo.classList.add('innerholder')
+    secondDisplay.append(innerHolderTwo)
+
+    const nameTitleTwo = document.createElement('div')
+    nameTitleTwo.classList.add('nametitle')
+    innerHolderTwo.append(nameTitleTwo)
+    nameTitleTwo.innerText = playerTwo
+
+    const picTwo = document.createElement('img')
+    picTwo.src = 'background2.png'
+    picTwo.classList.add('picone')
+    innerHolderTwo.append(picTwo)
+
+   
+    const restart = document.createElement('button')
+    restart.classList.add('restart')
+    restart.innerText = 'Restart'
+    container.append(restart)
+
+
+
+    restart.onclick = function(event) {
+        grabGame = document.querySelector('.gamecontainer')
+        grabButton = document.querySelector('.restart')
+        grabHeader = document.querySelector('.header')
+        grabGame.remove()
+        grabButton.remove()
+        grabHeader.remove()
+
+        test()
+    }
+
 
     let array = []
     //board creation
@@ -124,21 +177,11 @@ const test =  function() {(function () {
         array.push(gridDiv)
     }
 
-    let select = document.querySelectorAll('[data-status]')
   
 
 
     let dataArray = []
-    let winConditions = [
-        [0, 1, 2],
-        [0, 3, 6],
-        [0, 4, 8],
-        [3, 4, 5],
-        [6, 7, 8],
-        [6, 4, 2],
-        [1, 4, 7],
-        [2, 5, 8]
-    ]
+  
 
     //board event alternating x and o based on counter odd and even
     let counter = 0
@@ -155,7 +198,7 @@ const test =  function() {(function () {
             event.target.innerText = 'x'
             event.target.dataset.status = 0
             dataArray.push(event.target.dataset.status)
-            console.log(dataArray)
+            
             
             
             
@@ -163,14 +206,73 @@ const test =  function() {(function () {
             event.target.innerText = 'o'
             event.target.dataset.status = 1
             dataArray.push(event.target.dataset.status)
-            console.log(dataArray)
+            
             
         }
 
       
         
 
+
+        let winConditions = [
+            [0, 1, 2],
+            [0, 3, 6],
+            [0, 4, 8],
+            [3, 4, 5],
+            [6, 7, 8],
+            [6, 4, 2],
+            [1, 4, 7],
+            [2, 5, 8],
+          ];
+          //    circle means 1 and cross means 0
+          //    wincondion[0].
+          //    dataset.number = winCondition array
+          
     
+          for (let index = 0; index < winConditions.length; index++) {
+            const element = winConditions[index];
+            
+            // Possible winner combitions divs in array form
+            // Map returns array
+            // Every returns boolean (true, false)
+            const check = element.map((x) => array[x]);
+            
+    
+            const checkCircle = check.every((x) => x.dataset.status === "1");
+            const checkCross = check.every((x) => x.dataset.status === "0");
+            if (checkCircle) {
+                alert('O Wins!')
+            }
+            else if(checkCross) {
+                alert('X Wins!')
+            }
+    
+            
+          }
+        } 
+            
+
+
+
+
+    })()}
+
+    
+
+    
+
+
+
+
+
+
+
+
+    
+
+    
+
+    /*
         if(array[0].innerText === 'o' && array[1].innerText === 'o' && array[2].innerText === 'o') {console.log('you win')}
         else if(array[0].innerText === 'o' && array[3].innerText === 'o' && array[6].innerText === 'o') {console.log('you win')}
         else if(array[0].innerText === 'o' && array[4].innerText === 'o' && array[8].innerText === 'o') {console.log('you win')}
@@ -188,17 +290,4 @@ const test =  function() {(function () {
         else if(array[1].innerText === 'x' && array[4].innerText === 'x' && array[7].innerText === 'x') {console.log('you win')}
         else if(array[2].innerText === 'x' && array[5].innerText === 'x' && array[8].innerText === 'x') {console.log('you win')}
         else if(counter > 8) {console.log("Tie!")} 
-        } 
-
-
-    })()}
-
-    
-
-    
-
-
-    
-
-    
-
+*/
